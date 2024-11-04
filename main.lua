@@ -9,7 +9,7 @@ function love.load()
       char* Dialog_OpenFile();
       char* Dialog_SaveAsFile();
     ]]
-    dialog = ffi.load("./windialog")
+    dialog = ffi.load("./dialog")
 end
 
 function love.update(dt)
