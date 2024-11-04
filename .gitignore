@@ -1,6 +1,9 @@
 # VS Code settings folder
 .vscode/*
 
+# Work in progress files
+wip/*
+
 # Prerequisites
 *.d
 
