@@ -4,6 +4,9 @@
 # Work in progress files
 wip/*
 
+# Log files
+log/*
+
 # Prerequisites
 *.d
 

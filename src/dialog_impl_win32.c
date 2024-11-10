@@ -2,9 +2,9 @@
 #include <windows.h>
 #include <shlobj.h>
 
-static char szFile[MAX_PATH];
+static char szFile[2*MAX_PATH];
 
-char* Dialog_OpenFile() {
+char* Dialog_GetOpenFileName() {
     OPENFILENAME ofn;
     
     ZeroMemory(szFile, MAX_PATH);
@@ -13,7 +13,7 @@ char* Dialog_OpenFile() {
     ofn.hwndOwner = NULL;
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = MAX_PATH;
-    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0JSON Files (*.json)\0*.json\0";
+    ofn.lpstrFilter = "Binary Drawing Files (*.bdw)\0*.bdw\0"; // "Text Files (*.txt)\0*.txt\0JSON Files (*.json)\0*.json\0";
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
     ofn.nMaxFileTitle = 0;
@@ -21,10 +21,10 @@ char* Dialog_OpenFile() {
     ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
     if (GetOpenFileName(&ofn)) { return szFile; }
-    return "No such file";
+    return NULL;
 }
 
-char* Dialog_SaveAsFile() {
+char* Dialog_GetSaveAsFileName() {
     OPENFILENAME ofn;
     
     ZeroMemory(szFile, MAX_PATH);
@@ -33,14 +33,14 @@ char* Dialog_SaveAsFile() {
     ofn.hwndOwner = NULL;
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = MAX_PATH;
-    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0JSON Files (*.json)\0*.json\0";
+    ofn.lpstrFilter = "Binary Drawing Files (*.bdw)\0*.bdw\0";
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
     ofn.nMaxFileTitle = 0;
     ofn.lpstrInitialDir = NULL;
-    ofn.lpstrDefExt = ".txt";
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+    ofn.lpstrDefExt = ".bdw";
+    ofn.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
 
     if (GetSaveFileName(&ofn)) { return szFile; }
-    return "No such file";
+    return NULL;
 }
